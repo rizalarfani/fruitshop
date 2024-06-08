@@ -23,12 +23,14 @@ class _HomePageState extends State<HomePage> {
         'price': 'Rp. 80.000',
         'rate': 5.0,
         'image': 'assets/images/pinneaple.png',
+        'model': 'assets/models/carton_pineapple.glb'
       },
       {
         'name': 'Banana',
         'price': 'Rp. 25.000',
         'rate': 4.7,
         'image': 'assets/images/banana.png',
+        'model': 'assets/models/carton_banana.glb'
       },
     ];
   }

@@ -266,7 +266,7 @@ class DetailPage extends StatelessWidget {
               ),
             ),
             O3D.asset(
-              src: 'assets/models/carton_banana.glb',
+              src: food['model'],
               controller: o3dController,
               autoPlay: true,
               cameraControls: true,

@@ -84,12 +84,14 @@ class _HomePageState extends State<HomePage> {
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       Map<String, dynamic> recommended = recommendeds[index];
-                      return InkWell(
+                      return GestureDetector(
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const DetailPage(),
+                              builder: (context) => DetailPage(
+                                food: recommended,
+                              ),
                             ),
                           );
                         },

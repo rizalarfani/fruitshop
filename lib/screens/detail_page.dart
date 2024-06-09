@@ -5,14 +5,24 @@ import 'package:o3d/o3d.dart';
 
 import '../themes/Color_themes.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
   final Map<String, dynamic> food;
   const DetailPage({super.key, required this.food});
 
   @override
-  Widget build(BuildContext context) {
-    O3DController o3dController = O3DController();
+  State<DetailPage> createState() => _DetailPageState();
+}
 
+class _DetailPageState extends State<DetailPage> {
+  O3DController o3dController = O3DController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorThemes.uIGray80,
       body: SafeArea(
@@ -69,7 +79,7 @@ class DetailPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  food['name'],
+                  widget.food['name'],
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 40,
@@ -100,61 +110,62 @@ class DetailPage extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            Row(
                               children: [
-                                Text(
-                                  food['price'],
-                                  style: const TextStyle(
-                                    color: Color.fromRGBO(210, 174, 130, 1),
-                                    fontSize: 40,
-                                    fontFamily: 'lato',
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
-                                Row(
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    RatingBarIndicator(
-                                      itemPadding: const EdgeInsets.only(
-                                        right: 5,
-                                      ),
-                                      itemCount: 5,
-                                      itemSize: 20,
-                                      rating: food['rate'],
-                                      itemBuilder: (context, index) {
-                                        return Icon(
-                                          Icons.star,
-                                          size: 20,
-                                          color: ColorThemes.primaryOrange,
-                                        );
-                                      },
-                                    ),
                                     Text(
-                                      food['rate'].toString(),
+                                      widget.food['price'],
                                       style: const TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.white,
+                                        color: Color.fromRGBO(210, 174, 130, 1),
+                                        fontSize: 40,
                                         fontFamily: 'lato',
                                         fontWeight: FontWeight.w900,
                                       ),
                                     ),
+                                    const SizedBox(height: 10),
+                                    Row(
+                                      children: [
+                                        RatingBarIndicator(
+                                          itemPadding: const EdgeInsets.only(
+                                            right: 5,
+                                          ),
+                                          itemCount: 5,
+                                          itemSize: 20,
+                                          rating: widget.food['rate'],
+                                          itemBuilder: (context, index) {
+                                            return Icon(
+                                              Icons.star,
+                                              size: 20,
+                                              color: ColorThemes.primaryOrange,
+                                            );
+                                          },
+                                        ),
+                                        Text(
+                                          widget.food['rate'].toString(),
+                                          style: const TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.white,
+                                            fontFamily: 'lato',
+                                            fontWeight: FontWeight.w900,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ],
-                                )
-                              ],
-                            ),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: Text(
-                                'per Kg',
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                  color: ColorThemes.textGrey40,
-                                  fontSize: 16,
-                                  fontFamily: 'lato',
-                                  fontWeight: FontWeight.bold,
                                 ),
-                              ),
+                                Text(
+                                  'per Kg',
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    color: ColorThemes.textGrey40,
+                                    fontSize: 16,
+                                    fontFamily: 'lato',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
                             _buildCirclesButton(
                               SvgPicture.asset(
@@ -226,12 +237,14 @@ class DetailPage extends StatelessWidget {
                                     ),
                                   ),
                                   GestureDetector(
-                                    child: const Icon(
-                                      Icons.plus_one,
+                                      child: const Text(
+                                    '+',
+                                    style: TextStyle(
                                       color: Colors.white,
-                                      size: 30,
+                                      fontSize: 26,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                  ),
+                                  )),
                                 ],
                               ),
                             ),
@@ -265,12 +278,17 @@ class DetailPage extends StatelessWidget {
                 ),
               ),
             ),
-            O3D.asset(
-              src: food['model'],
-              controller: o3dController,
-              autoPlay: true,
-              cameraControls: true,
-              ar: false,
+            Transform.scale(
+              scale: 0.5,
+              alignment: Alignment.center,
+              child: O3D.asset(
+                src: widget.food['model'],
+                controller: o3dController,
+                autoPlay: false,
+                cameraControls: true,
+                ar: false,
+                disableZoom: true,
+              ),
             ),
           ],
         ),

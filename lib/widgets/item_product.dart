@@ -24,7 +24,7 @@ class ItemProduct extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            width: 142,
+            width: 150,
             height: 101,
             decoration: BoxDecoration(
               color: index! % 2 == 0
@@ -40,6 +40,8 @@ class ItemProduct extends StatelessWidget {
               children: [
                 Positioned(
                   top: -35,
+                  left: 0,
+                  right: 0,
                   child: Image.asset(
                     image ?? '',
                     fit: BoxFit.cover,

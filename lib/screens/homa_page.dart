@@ -32,6 +32,13 @@ class _HomePageState extends State<HomePage> {
         'image': 'assets/images/banana.png',
         'model': 'assets/models/carton_banana.glb'
       },
+      {
+        'name': 'Orange',
+        'price': 'Rp. 45.000',
+        'rate': 5.0,
+        'image': 'assets/images/orange.png',
+        'model': 'assets/models/carton_orange.glb',
+      },
     ];
   }
 
